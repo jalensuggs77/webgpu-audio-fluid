@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<title>Cyber Fluid · 赛博流体沙盒</title>
+	<meta name="description" content="WebGPU + Three.js 百万级粒子流体沙盒，随音乐低音炸裂、重组。">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+	<div id="stage"></div>
+
+	<header class="hud glass" id="hud">
+		<div class="brand">
+			<span class="brand-mark"></span>
+			<div>
+				<h1>CYBER<em>FLUID</em></h1>
+				<p>GPU 粒子流体 · 音频驱动</p>
+			</div>
+		</div>
+		<div class="stats">
+			<div><span id="stat-fps">--</span><label>FPS</label></div>
+			<div><span id="stat-count">--</span><label>粒子</label></div>
+			<div><span id="stat-backend" class="badge">--</span><label>后端</label></div>
+		</div>
+	</header>
+
+	<aside class="panel glass" id="panel">
+		<div class="panel-head">
+			<h2>控制台 <small>CONTROL DECK</small></h2>
+			<button class="icon-btn" id="btn-collapse" title="收起面板 (H)" aria-label="收起面板">⟩</button>
+		</div>
+
+		<div class="panel-body">
+			<section>
+				<h3>音频源 <small>AUDIO</small></h3>
+				<div class="btn-row">
+					<button class="btn" data-audio="mic"><span>◉</span>麦克风</button>
+					<button class="btn" data-audio="file"><span>▤</span>本地音频</button>
+					<button class="btn" data-audio="demo"><span>✦</span>演示节拍</button>
+					<button class="btn ghost" data-audio="stop" title="停止"><span>■</span></button>
+				</div>
+				<input type="file" id="file-input" accept="audio/*" hidden>
+				<p class="status" id="audio-status">未连接 · 可直接把音频文件拖入页面</p>
+
+				<div class="meter">
+					<canvas id="spectrum" width="600" height="120"></canvas>
+					<div class="bands">
+						<div class="band"><label>BASS</label><i><b id="m-bass"></b></i></div>
+						<div class="band"><label>MID</label><i><b id="m-mid"></b></i></div>
+						<div class="band"><label>HIGH</label><i><b id="m-high"></b></i></div>
+						<div class="beat" id="beat-led" title="低音节拍">BEAT</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h3>流体物理 <small>PHYSICS</small></h3>
+				<div class="sliders" id="sliders-physics"></div>
+			</section>
+
+			<section>
+				<h3>霓虹视觉 <small>NEON</small></h3>
+				<div class="sliders" id="sliders-visual"></div>
+				<div class="palettes" id="palettes"></div>
+			</section>
+
+			<section>
+				<h3>形态 <small>MORPH</small></h3>
+				<div class="chips" id="shapes"></div>
+				<label class="toggle"><input type="checkbox" id="auto-morph"><span></span>重低音自动变形</label>
+				<label class="toggle"><input type="checkbox" id="auto-rotate"><span></span>镜头自动环绕</label>
+			</section>
+
+			<section>
+				<h3>粒子规模 <small>PARTICLES</small></h3>
+				<div class="chips" id="counts"></div>
+				<p class="hint">切换数量会重新加载场景（参数自动保留）。</p>
+			</section>
+
+			<footer class="keys">
+				<span><kbd>拖拽</kbd>旋转</span>
+				<span><kbd>滚轮</kbd>缩放</span>
+				<span><kbd>Shift</kbd>+移动 引力井</span>
+				<span><kbd>空格</kbd>手动炸裂</span>
+				<span><kbd>H</kbd>隐藏界面</span>
+			</footer>
+		</div>
+	</aside>
+
+	<button class="fab glass" id="btn-expand" aria-label="展开面板" title="展开面板 (H)">⟨ 控制台</button>
+
+	<div class="drop-overlay" id="drop-overlay"><div>松开以播放音频</div></div>
+	<div class="fatal glass" id="fatal" hidden></div>
+
+	<script type="module" src="./src/main.js"></script>
+</body>
+</html>

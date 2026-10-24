@@ -1,0 +1,18 @@
+{
+  "name": "webgpu-audio-fluid",
+  "version": "1.0.0",
+  "description": "WebGPU / Three.js 赛博流体沙盒：百万级 GPU 粒子 + Web Audio 低音驱动 + 暗黑毛玻璃控制面板",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.5"
+  }
+}
